@@ -1,17 +1,12 @@
 package ua;
 
-import ua.domain.*;
 import ua.domain.Dish.Dessert;
 import ua.domain.Dish.Drink;
 import ua.domain.Dish.MainCourse;
 import ua.domain.Enum.DrinkSize;
 import ua.domain.Api.DishApi;
-import ua.domain.Service.Menu;
-import ua.domain.Service.Order;
-import ua.domain.Service.Orders;
-import ua.domain.Service.Services;
+import ua.domain.Service.*;
 
-import java.security.Provider;
 import java.util.List;
 import static ua.domain.Enum.OrderStatus.PAID;
 
@@ -30,7 +25,7 @@ public class App {
         System.out.println(menu.isDish(1));
         System.out.println(menu.getListFromMenu());
         System.out.println();
-        Services services = new Services();
+        Services services = user.createService();
         Order order1 = services.createOrder(6);
         Order order2 = services.createOrder(5);
         System.out.println(order1.getCreated());

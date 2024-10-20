@@ -10,6 +10,9 @@ public class Services {
     private static final Orders ORDERS = Orders.getOrders();
     private static final Menu MENU = Menu.getMenu();
 
+    Services() {
+    }
+
     public Order createOrder(int numberOfTable) {
         int orderId = ORDERS.getNumberOfOrders() + 1;
         Order order = new Order(numberOfTable, orderId);
@@ -39,7 +42,7 @@ public class Services {
         return orders;
     }
 
-    public List<Order> getOrderList(){
+    public List<Order> getOrderList() {
         return ORDERS.getOrderList();
 
     }

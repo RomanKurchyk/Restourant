@@ -1,4 +1,4 @@
-package ua.domain;
+package ua.domain.Service;
 
 public class User {
 
@@ -32,6 +32,8 @@ public class User {
         this.password = password;
     }
 
-
+    public Services createService() {
+        return new Services();
+    }
 
 }
