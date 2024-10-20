@@ -31,9 +31,15 @@ public class Orders {
         return numberOfOrders;
     }
 
-    public boolean add(Order order) {
-        numberOfOrders++;
-        ORDER_LIST.add(order);
-        return true;
+    public synchronized boolean add(Order order) throws WorkExeption {
+
+        if (ORDERS.isOrder(order.getId())) throw new WorkExeption("The order has already been added ");
+        try {
+            ORDER_LIST.add(order);
+        } catch (Exception e) {
+            throw new WorkExeption("Order didn't add", e);
         }
+        numberOfOrders++;
+        return true;
+    }
 }

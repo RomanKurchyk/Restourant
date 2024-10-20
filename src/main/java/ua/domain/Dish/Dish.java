@@ -1,10 +1,12 @@
 package ua.domain.Dish;
 
 import ua.domain.Api.DishApi;
+import ua.domain.Service.WorkExeption;
 
 public class Dish implements DishApi {
 
     protected Dish(int id, double prize, String name, boolean vegeterian) {
+        if (id <= 0 || prize <= 0) throw new WorkExeption("Enter the correct data");
         this.price = prize;
         this.name = name;
         this.vegeterian = vegeterian;
@@ -38,7 +40,8 @@ public class Dish implements DishApi {
     }
 
     @Override
-    public void setPrice(double price) {
+    public void setPrice(double price) throws WorkExeption {
+        if (price <= 0) throw new WorkExeption("Enter the correct price");
         this.price = price;
     }
 

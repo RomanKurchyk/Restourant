@@ -1,5 +1,7 @@
 package ua.domain.Api;
 
+import ua.domain.Service.WorkExeption;
+
 public interface DishApi extends Identifier {
 
     boolean isVegeterian();
@@ -12,7 +14,7 @@ public interface DishApi extends Identifier {
 
     double getPrice();
 
-    void setPrice(double price);
+    void setPrice(double price) throws WorkExeption;
 
     String getName();
 

@@ -1,13 +1,12 @@
 package ua.domain.Service;
 
 import ua.domain.Api.DishApi;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Menu {
 
-    private static List<DishApi> dishList = new ArrayList<>();
+    private static Set<DishApi> dishList = new HashSet<>();
     private static final Menu MENU = new Menu();
 
     private Menu() {
@@ -18,20 +17,31 @@ public class Menu {
         return MENU;
     }
 
-    public static void setMenu(List<DishApi> newMenu) {
+    public static void setMenu(Set<DishApi> newMenu) {
         dishList = newMenu;
     }
 
-    public List<DishApi> getListFromMenu() {
+    public Set<DishApi> getListFromMenu() {
         return dishList;
     }
 
-    public boolean addDish(DishApi dish) {
-        return dishList.add(dish);
+    public boolean addDish(DishApi dish) throws WorkExeption{
+        try {
+            dishList.add(dish);
+        } catch (Exception e) {
+            throw new WorkExeption("Didn't add", e);
+        }
+        return true;
     }
 
     public boolean deleteDish(DishApi dish) {
-        return dishList.remove(dish);
+        try {
+            dishList.remove(dish);
+
+        } catch (Exception e) {
+            throw new WorkExeption("Didn't delete", e);
+        }
+        return true;
     }
 
     public boolean isDish(int id) {
@@ -41,12 +51,11 @@ public class Menu {
         return false;
     }
 
-    public DishApi getDish(int id) {
+    public DishApi getDish(int id) throws WorkExeption {
         for (DishApi dish : dishList) {
             if (dish.getId() == id) return dish;
         }
-        System.out.println("Not found");
-        return null;
+        throw new WorkExeption("Not found");
     }
 
 }
