@@ -1,4 +1,4 @@
-package ua.domain.Service;
+package ua.domain.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,17 +7,18 @@ public class Orders {
 
     private static final List<Order> ORDER_LIST = new ArrayList<>();
     private static int numberOfOrders = 0;
-    private static final Orders ORDERS = new Orders();
+    private static Orders orders;
 
     private Orders() {
     }
 
-    public static Orders getOrders() {
-        return ORDERS;
+    List<Order> getOrderList() {
+        return ORDER_LIST;
     }
 
-    public List<Order> getOrderList() {
-        return ORDER_LIST;
+    public static synchronized Orders getOrders() {
+        if (orders == null) orders = new Orders();
+        return orders;
     }
 
     public boolean isOrder(int id) {
@@ -33,7 +34,7 @@ public class Orders {
 
     public synchronized boolean add(Order order) throws WorkExeption {
 
-        if (ORDERS.isOrder(order.getId())) throw new WorkExeption("The order has already been added ");
+        if (orders.isOrder(order.getId())) throw new WorkExeption("The order has already been added ");
         try {
             ORDER_LIST.add(order);
         } catch (Exception e) {
@@ -41,5 +42,15 @@ public class Orders {
         }
         numberOfOrders++;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        System.out.println("Orders:");
+        for (Order order : ORDER_LIST
+        ) {
+            System.out.println(order.getId() + ". " + order);
+        }
+        return "";
     }
 }

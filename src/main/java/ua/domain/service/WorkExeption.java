@@ -1,10 +1,8 @@
-package ua.domain.Service;
+package ua.domain.service;
 
 public class WorkExeption extends RuntimeException {
-    public WorkExeption() {
-    }
 
-    public WorkExeption(String message) {
+   public WorkExeption(String message) {
         super(message);
     }
 
@@ -12,7 +10,4 @@ public class WorkExeption extends RuntimeException {
         super(message, cause);
     }
 
-    public WorkExeption(Throwable cause) {
-        super(cause);
-    }
 }

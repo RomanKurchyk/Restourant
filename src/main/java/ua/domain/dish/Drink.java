@@ -1,7 +1,12 @@
-package ua.domain.Dish;
+package ua.domain.dish;
 
-import ua.domain.Enum.DrinkSize;
-import ua.domain.Service.WorkExeption;
+import lombok.Getter;
+import lombok.ToString;
+import ua.domain.enum_for_dish.DrinkSize;
+import ua.domain.service.WorkExeption;
+
+@ToString(callSuper = true)
+@Getter
 
 public class Drink extends Dish {
 
@@ -15,29 +20,9 @@ public class Drink extends Dish {
         this.volume = volume;
     }
 
-    public DrinkSize getDrinkSize() {
-        return drinkSize;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setDrinkSize(DrinkSize drinkSize) {
-        this.drinkSize = drinkSize;
-    }
-
     public void setVolume(int volume) throws WorkExeption {
         if (volume <= 0) throw new WorkExeption("Enter the correct weight");
         this.volume = volume;
     }
 
-    @Override
-    public String toString() {
-
-        return super.toString() +
-                "drinkSize=" + drinkSize +
-                ", volume=" + volume +
-                '}';
-    }
 }

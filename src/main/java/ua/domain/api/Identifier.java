@@ -1,8 +1,6 @@
-package ua.domain.Api;
+package ua.domain.api;
 
+@FunctionalInterface
 public interface Identifier {
     int getId();
-
-
-
 }

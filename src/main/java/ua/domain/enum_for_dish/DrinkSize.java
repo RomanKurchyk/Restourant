@@ -1,4 +1,4 @@
-package ua.domain.Enum;
+package ua.domain.enum_for_dish;
 
 public enum DrinkSize {
 

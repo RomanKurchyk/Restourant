@@ -1,17 +1,17 @@
-package ua.domain.Service;
+package ua.domain.service;
 
-import ua.domain.Enum.OrderStatus;
-import ua.domain.Api.DishApi;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import ua.domain.dish.Dish;
+import ua.domain.enum_for_dish.OrderStatus;
 import java.util.List;
-import java.util.Set;
+
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 
 public class Services {
 
     private static final Orders ORDERS = Orders.getOrders();
     private static final Menu MENU = Menu.getMenu();
-
-    Services() {
-    }
 
     public Order createOrder(int numberOfTable) throws WorkExeption {
         if (numberOfTable < 1) throw new WorkExeption("Send right number of table");
@@ -21,7 +21,7 @@ public class Services {
         else throw new WorkExeption("Order not created");
     }
 
-    public List<Order> ActiveByTable(int numberOfTable) throws WorkExeption {
+    public List<Order> activeByTable(int numberOfTable) throws WorkExeption {
         if (numberOfTable < 1) throw new WorkExeption("Send right number of table");
         List<Order> orders = ORDERS.getOrderList();
         for (Order order : orders
@@ -32,15 +32,11 @@ public class Services {
         return orders;
     }
 
-    public Set<DishApi> vegeterianList() throws WorkExeption {
-        Set<DishApi> dishes = MENU.getListFromMenu();
-        dishes.removeIf(dish -> !dish.isVegeterian());
+    public List<Dish> getVegetarianList() throws WorkExeption {
+        List<Dish> dishes = MENU.getListFromMenu();
+        dishes.removeIf(dish -> !dish.isVegetarian());
         if (dishes.isEmpty()) throw new WorkExeption("Vegeterian dish is not found");
         return dishes;
     }
 
-    public List<Order> getOrderList() {
-        return ORDERS.getOrderList();
-
-    }
 }
