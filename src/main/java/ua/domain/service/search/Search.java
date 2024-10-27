@@ -1,7 +1,9 @@
 package ua.domain.service.search;
 
 import ua.domain.api.Identifier;
+
 import ua.domain.service.WorkException;
+
 import java.util.List;
 
 public class Search<E extends Identifier> {
