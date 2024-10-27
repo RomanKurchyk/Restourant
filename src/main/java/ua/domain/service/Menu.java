@@ -1,18 +1,19 @@
 package ua.domain.service;
 
 import ua.domain.dish.Dish;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
 
-    private static List<Dish> dishes = new ArrayList<>();
+    private static List<Dish> dishes = new ArrayList<>(100);
     private static Menu menu;
 
     private Menu() {
     }
 
-    List<Dish> getListFromMenu() {
+    public static synchronized List<Dish> getListFromMenu() {
         return dishes;
     }
 
@@ -25,11 +26,12 @@ public class Menu {
         dishes = newMenu;
     }
 
-    public boolean addDish(Dish dish) throws WorkExeption {
+    public boolean addDish(Dish dish) throws WorkException {
+        if(dish==null||isContainDish(dish.getId())||isContainDish(dish.getName())) throw new WorkException("Can't added");
         try {
             dishes.add(dish);
         } catch (Exception e) {
-            throw new WorkExeption("Didn't add", e);
+            throw new WorkException("Didn't add", e);
         }
         return true;
     }
@@ -39,7 +41,7 @@ public class Menu {
             dishes.remove(dish);
 
         } catch (Exception e) {
-            throw new WorkExeption("Didn't delete", e);
+            throw new WorkException("Didn't delete", e);
         }
         return true;
     }
@@ -51,11 +53,18 @@ public class Menu {
         return false;
     }
 
-    public Dish getDish(int id) throws WorkExeption {
+    public boolean isContainDish(String name) {
+        for (Dish dish : dishes) {
+            if (dish.getName().equalsIgnoreCase(name)) return true;
+        }
+        return false;
+    }
+
+    public Dish getDish(int id) throws WorkException {
         for (Dish dish : dishes) {
             if (dish.getId() == id) return dish;
         }
-        throw new WorkExeption("Not found");
+        throw new WorkException("Not found");
     }
 
     @Override

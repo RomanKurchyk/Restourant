@@ -12,13 +12,13 @@ public class Orders {
     private Orders() {
     }
 
-    List<Order> getOrderList() {
-        return ORDER_LIST;
-    }
-
     public static synchronized Orders getOrders() {
         if (orders == null) orders = new Orders();
         return orders;
+    }
+
+    public static List<Order> getOrdersList() {
+        return ORDER_LIST;
     }
 
     public boolean isOrder(int id) {
@@ -32,13 +32,13 @@ public class Orders {
         return numberOfOrders;
     }
 
-    public synchronized boolean add(Order order) throws WorkExeption {
+    public synchronized boolean add(Order order) throws WorkException {
 
-        if (orders.isOrder(order.getId())) throw new WorkExeption("The order has already been added ");
+        if (orders.isOrder(order.getId())) throw new WorkException("The order has already been added ");
         try {
             ORDER_LIST.add(order);
         } catch (Exception e) {
-            throw new WorkExeption("Order didn't add", e);
+            throw new WorkException("Order didn't add", e);
         }
         numberOfOrders++;
         return true;

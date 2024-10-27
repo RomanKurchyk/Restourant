@@ -7,8 +7,8 @@ import lombok.ToString;
 
 public class MainCourse extends Dish {
 
-    public MainCourse(int id, double prize, String name, boolean vegeterian) {
-        super(id, prize, name, vegeterian);
+    public MainCourse(int id, double price, String name, boolean vegetarian) {
+        super(id, price, name, vegetarian);
     }
 
 
